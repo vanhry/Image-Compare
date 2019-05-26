@@ -101,10 +101,13 @@ if __name__ == '__main__':
             compare = Image.open(os.path.join(dataset, other_file))
             if filename == other_file:
                 continue
+            # for duplicate
             elif np.array_equal(current, compare):
                 print(filename, other_file)
+            # for modification
             elif compare_avg_hash(current, compare) == 0:
                 print(filename, other_file)
+            # for similar
             elif np.array_equal(findpeaks(hist_hash(current)), findpeaks(hist_hash(compare))):  # \
                 # and np.array_equal(np.argsort(findpeaks(hist_hash(current))),np.argsort(findpeaks(hist_hash(compare)))):
                 print(filename, other_file)
